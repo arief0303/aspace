@@ -55,9 +55,9 @@ export default {
             )
 
             function loadPlayer(scene, engine, canvas) {
-                BABYLON.SceneLoader.ImportMesh("", "assets/player/", "chara_full.glb", scene, (meshes, particleSystems, skeletons, animationGroups) => {
+                BABYLON.SceneLoader.ImportMesh("", "assets/player/", "ybot.glb", scene, (meshes, particleSystems, skeletons, animationGroups) => {
                     var player = meshes[0];
-                    player.scaling = new BABYLON.Vector3(0.1, 0.1, 0.1);
+                    /* player.scaling = new BABYLON.Vector3(0.1, 0.1, 0.1);
                     player.position = new BABYLON.Vector3(0, 0, 0);
                     player.checkCollisions = true;
                     player.ellipsoid = new BABYLON.Vector3(0.5, 1, 0.5);
@@ -70,19 +70,18 @@ export default {
                     let characterCustomization = CharacterCustomization.getInstance();
                     characterCustomization.setCurrentAvatarPack("Female", "HeadFemaleBase", "BodyFemaleBase", "PantsFemaleBase");
                     let characterData = characterCustomization.getCurrentAvatarPack();
-                    setupCharacterPack(meshes, characterData);
+                    setupCharacterPack(meshes, characterData); */
+                    player.rotation = player.rotationQuaternion.toEulerAngles();
+                    player.rotationQuaternion = null;
                     const myAgmap = {
-                        "idle": animationGroups[3],
-                        "walk": animationGroups[9],
-                        "run": animationGroups[5],
-                        "idleJump": animationGroups[4],
-                        "runJump": animationGroups[4],
-                        "dancing": animationGroups[0],
-                        "happy": animationGroups[1],
-                        "hello": animationGroups[2],
-                        "salute": animationGroups[6],
-                        "sitting": animationGroups[7],
-                        "sleeping": animationGroups[8],
+                        "idle": animationGroups[0],
+                        "walk": animationGroups[6],
+                        "run": animationGroups[2],
+                        "walkBack": animationGroups[7],
+                        "turnLeft": animationGroups[4],
+                        "turnRight": animationGroups[5],
+                        "runJump": animationGroups[3],
+                        "idleJump": animationGroups[1]
                     };
 
                     //if the skeleton does not have any animation ranges then set them as below
@@ -131,7 +130,7 @@ export default {
                     cc.setTurnLeftAnim("turnLeft", 0.5, true);
                     cc.setTurnRightAnim("turnRight", 0.5, true);
                     cc.setWalkBackAnim("walkBack", 0.5, true);
-                    cc.setIdleJumpAnim("idleJump", .5, false);
+                    cc.setIdleJumpAnim("idleJump", 0.6, false);
                     cc.setRunJumpAnim("runJump", 0.6, false);
                     //set the animation range name to "null" to prevent the controller from playing
                     //a player animation.
